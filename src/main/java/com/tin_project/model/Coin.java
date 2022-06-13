@@ -1,4 +1,4 @@
-package com.tin_project.entity;
+package com.tin_project.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
