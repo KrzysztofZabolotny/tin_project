@@ -1,7 +1,7 @@
 package com.tin_project.scraper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tin_project.model.Coin;
+import com.tin_project.entity.Coin;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.NameValuePair;
@@ -16,6 +16,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -42,6 +43,7 @@ public class CoinScraper {
 
       for (Data d : scraperPackage.data) {
         coins.add(new Coin(d.getName(), d.getSymbol(), d.quote.nOK.getPrice(), CURRENCY));
+        System.out.println(d);
       }
 
 

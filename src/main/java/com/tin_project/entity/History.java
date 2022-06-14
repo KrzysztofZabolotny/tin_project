@@ -1,4 +1,4 @@
-package com.tin_project.model;
+package com.tin_project.entity;
 
 public class History {
   private String coinName;

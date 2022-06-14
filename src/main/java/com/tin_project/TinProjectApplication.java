@@ -1,45 +1,34 @@
 package com.tin_project;
 
-import com.tin_project.model.User;
-import com.tin_project.repository.UserRepositoryInterface;
+import com.tin_project.entity.User;
+import com.tin_project.repository.CoinRepository;
+import com.tin_project.repository.UserRepository;
+import com.tin_project.scraper.CoinScraper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @SpringBootApplication
 public class TinProjectApplication implements CommandLineRunner {
 
-
-//  @Bean
-//  public WebMvcConfigurer corsConfigurer() {
-//    return new WebMvcConfigurer() {
-//      @Override
-//      public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/users").allowedOrigins("http://localhost:3000");
-//      }
-//    };
-//  }
   @Autowired
-  private UserRepositoryInterface userRepositoryInterface;
+  private UserRepository userRepository;
 
   public static void main(String[] args) {
     SpringApplication.run(TinProjectApplication.class, args);
   }
 
 
-  //TODO populate the DB with all necessary entities for the project
+  //TODO populate the DB with all necessary entities
   @Override
-  public void run(String... args){
+  public void run(String... args) throws Exception {
 
-//    this.userRepositoryInterface.save(new User("Chris@wp.pl", "password1"));
-//    this.userRepositoryInterface.save(new User("Natalia@wp.pl", "password2"));
-//    this.userRepositoryInterface.save(new User("Tadeusz@wp.pl", "password3"));
+    this.userRepository.save(new User("Chris", "Zabolotny"));
+    this.userRepository.save(new User("Natalia", "Zabolotna"));
+    this.userRepository.save(new User("Tadeusz", "Zabolotny"));
 
 
   }
