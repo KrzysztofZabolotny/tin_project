@@ -24,12 +24,14 @@ public class MyUserDetailsService implements UserDetailsService {
 
     com.tin_project.entity.User user = new com.tin_project.entity.User();
    for (com.tin_project.entity.User u: allUsers){
-     System.out.println(u.getUsername() + " " + u.getPassword());
-     if (u.getUsername().equals(userName)) user = u;
+     if (u.getUsername().equals(userName)) {
+       user = u;
+       return new User(user.getUsername(),user.getPassword(),new ArrayList<>());//TODO change to my user
+     }
    }
-    System.out.println("Username " + userName);
-    System.out.println("Found user" + user.getUsername() + " " + user.getPassword());
-    return new User(user.getUsername(),user.getPassword(),new ArrayList<>());//TODO change to my user
+
+   return new User("costam", "costam", new ArrayList<>());
+
 
 
 

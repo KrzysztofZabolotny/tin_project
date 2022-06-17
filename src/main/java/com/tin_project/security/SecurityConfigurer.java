@@ -1,7 +1,6 @@
 package com.tin_project.security;
 
 import com.tin_project.filters.JwtRequestFilter;
-import com.tin_project.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,8 +41,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.csrf().disable()
             .authorizeRequests().antMatchers("/authenticate").permitAll()
-            .antMatchers("/register/**").permitAll().
-            anyRequest().authenticated().and().
+            .antMatchers("/register/**").permitAll()
+            .antMatchers("/coins/**").permitAll()
+            .antMatchers("/history/**").permitAll()
+            .antMatchers("/login/**").permitAll()
+            .anyRequest().authenticated().and().
             exceptionHandling().and().sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

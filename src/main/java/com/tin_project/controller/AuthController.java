@@ -1,7 +1,5 @@
 package com.tin_project.controller;
 
-import com.tin_project.entity.History;
-import com.tin_project.entity.User;
 import com.tin_project.models.AuthenticationRequest;
 import com.tin_project.models.AuthenticationResponse;
 import com.tin_project.repository.UserRepository;
@@ -15,13 +13,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000/**")
 @RestController
-public class TestController {
+public class AuthController {
 
 
   @Autowired
@@ -35,26 +29,6 @@ public class TestController {
 
   @Autowired
   private MyUserDetailsService userDetailsService;
-
-  @GetMapping("/testNumbers")
-  public List<Integer> testInts() {
-    return new ArrayList<>(Arrays.asList(1, 17, 1, 66, 12,4));
-  }
-
-  @GetMapping("/testHistory")
-  public List<History> testHistory() {
-    return new ArrayList<>(Arrays.asList(
-            new History("Bitcoin",20000,"2022.01.01"),
-            new History("Bitcoin",30000,"2022.01.02"),
-            new History("Bitcoin",15000,"2022.01.03"),
-            new History("Bitcoin",18000,"2022.01.04"),
-            new History("Bitcoin",21000,"2022.01.05"),
-            new History("Bitcoin",50000,"2022.01.06"),
-            new History("Bitcoin",11000,"2022.01.07"),
-            new History("Bitcoin",70000,"2022.01.08"),
-            new History("Bitcoin",10000,"2022.01.09")
-            ));
-  }
 
   @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
   public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
@@ -74,14 +48,10 @@ public class TestController {
 
     final String jwt = jwtTokenUtil.generateToken(userDetails);
 
+
+
     return ResponseEntity.ok(new AuthenticationResponse(jwt));
   }
 
-  @PostMapping("/register")
-  public User register(@RequestBody User user){
 
-    repository.save(user);
-
-    return  user;
-  }
 }

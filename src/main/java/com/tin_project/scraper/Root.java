@@ -1,8 +1,6 @@
 package com.tin_project.scraper;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class Root {

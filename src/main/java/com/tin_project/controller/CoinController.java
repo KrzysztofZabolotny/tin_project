@@ -1,7 +1,9 @@
 package com.tin_project.controller;
 
 import com.tin_project.entity.Coin;
+import com.tin_project.entity.History;
 import com.tin_project.repository.CoinRepository;
+import com.tin_project.util.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class CoinController {
 
@@ -34,6 +37,13 @@ public class CoinController {
       if(coin.getDate().equals(date))coinsWithCorrectDate.add(coin);
     }
     return coinsWithCorrectDate;
+  }
+
+  @GetMapping("/history")
+  public List<History> getHistory() {
+
+    return DataGenerator.generateHistory();
+
   }
 
 

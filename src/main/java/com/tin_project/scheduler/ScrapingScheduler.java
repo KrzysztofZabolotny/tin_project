@@ -13,8 +13,7 @@ public class ScrapingScheduler {
   @Autowired
   private CoinRepository coinRepository;
 
-
-  //@Scheduled(fixedDelay = 86400000)
+  @Scheduled(fixedDelay = 86400000)
   private void scheduledScrape() {
     CoinScraper coinScraper = new CoinScraper();
     coinRepository.saveAll(coinScraper.scrape());

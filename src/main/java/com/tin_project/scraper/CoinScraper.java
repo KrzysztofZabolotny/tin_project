@@ -2,6 +2,7 @@ package com.tin_project.scraper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tin_project.entity.Coin;
+import com.tin_project.util.DataGenerator;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.NameValuePair;
@@ -16,18 +17,19 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 
 public class CoinScraper {
-  private final String API_KEY = "904b189c-2820-4567-8416-2830961ddeea";
+  private final String API_KEY = "d37834a6-0ce0-4d39-8de7-7d7b8420470c";
   private final String START = "1";
   private final String LIMIT = "10";
   private final String CURRENCY = "NOK";
 
   public List<Coin> scrape() {
-    String uri = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+    String uri = "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
+    //TODO String uri = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"; was working 15.06.2022 bun now throws unknown error
+
     List<NameValuePair> parameters = new ArrayList<>();
     parameters.add(new BasicNameValuePair("start", START));
     parameters.add(new BasicNameValuePair("limit", LIMIT));
@@ -40,10 +42,14 @@ public class CoinScraper {
       ObjectMapper om = new ObjectMapper();
       ScraperPackage scraperPackage = om.readValue(result, ScraperPackage.class);
 
+      int counter = 0;
 
       for (Data d : scraperPackage.data) {
-        coins.add(new Coin(d.getName(), d.getSymbol(), d.quote.nOK.getPrice(), CURRENCY));
-        System.out.println(d);
+        String name = DataGenerator.generateName(counter);
+        String symbol = DataGenerator.generateSymbol(name);
+
+        coins.add(new Coin(name, symbol, d.quote.nOK.getPrice(), CURRENCY));
+        counter++;
       }
 
 
@@ -53,7 +59,6 @@ public class CoinScraper {
       System.out.println("Error: Invalid URL " + e);
     }
 
-    //coins.sort(Comparator.comparing(Coin::getName));
     return coins;
   }
 

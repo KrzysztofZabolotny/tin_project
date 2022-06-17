@@ -1,9 +1,7 @@
 package com.tin_project;
 
 import com.tin_project.entity.User;
-import com.tin_project.repository.CoinRepository;
 import com.tin_project.repository.UserRepository;
-import com.tin_project.scraper.CoinScraper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

@@ -25,11 +25,17 @@ public class UserController {
   public String populateUsers(@PathVariable int number) {
 
     for (int i = 0; i < number; i++) {
-      int name = (int)(Math.random()*number);
-      this.repository.save(new User("Name"+name, "Surname"+name));
+      int name = (int) (Math.random() * number);
+      this.repository.save(new User("Name" + name, "Surname" + name));
     }
-
-
     return "saved";
+  }
+
+  @PostMapping("/register")
+  public User register(@RequestBody User user) {
+
+    repository.save(user);
+
+    return user;
   }
 }
