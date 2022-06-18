@@ -43,7 +43,7 @@ public class DataGenerator {
 
 
     List<History> history = new ArrayList<>();
-    for (int i = getToday(); i >= 0; i--) {
+    for (int i = 30; i >= 0; i--) {
       history.add(new History("Bitcoin",generateRandomPrice(10000,130000),generateDateBefore(i)));
     }
     return history;

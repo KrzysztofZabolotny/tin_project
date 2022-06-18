@@ -30,7 +30,7 @@ public class MyUserDetailsService implements UserDetailsService {
      }
    }
 
-   return new User("costam", "costam", new ArrayList<>());
+   return new User("test", "test", new ArrayList<>());
 
 
 
